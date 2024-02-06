@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time</title>
+    <style>
+        *{
+            margin: 0;
+            padding: o;
+            font-family: "poppins", serif; 
+            box-sizing: border-box;
+        }
+        .hero{
+            width: 100%;
+            min-height:100vh;
+            background : linear-gradient(45deg,#08001f,#30197d);
+            color:#fff;
+            position: relative;
+            border-radius: 10px; 
+        }
+        .container{
+            width: 800px;
+            height: 180px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: rgb(16, 224, 165);
+            border-radius: 900px;
+        }
+        .clock{
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 0, 13, 0.11);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(40px);
+        }
+        .container::before{
+            content: '';
+            width: 180px;
+            height: 180px;
+            background: #f41b75;
+            border-radius: 5px;
+            position: absolute;
+            left: -50px;
+            top: -50px;
+            z-index: -1;
+        }
+        .container::after{
+            content: '';
+            width: 180px;
+            height: 180px;
+            background: #419aff;
+            border-radius: 100px;
+            position: absolute;
+            right:  -30px;
+            bottom: -50px;
+            z-index: -1;
+        }
+        .clock span {
+            font-size: 80px;
+            width: 110px;
+            display: inline;
+            text-align: center;
+            position: relative;
+        }
+        .clock span::after{
+            font-size: 16px;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        #hrs::after{
+            content: 'hrs';
+        }
+        #mins::after{
+            content: 'mins';
+        }
+        #sec::after{
+            content: 'sec';
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero" >
+        <div class="container">
+            <div class="clock">
+                <span id="hrs">00</span>   
+                <span>:</span>  
+                <span id="mins">00</span>
+                <span>:</span>
+                <span id="sec">00</span>
+                <span id="session">AM</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let hrs =document.getElementById("hrs");
+        let mins =document.getElementById("mins");
+        let sec  =document.getElementById("sec");
+        let session = document.getElementById("session");
+        setInterval(()=>{
+
+        let currentTime = new Date();
+       if (hrs => 12){
+        session.innerHTML = "PM"
+       }else{
+        session.innerHTML = "AM"
+       }
+       if(hrs > 12){
+          hrs = hrs - 12;
+       }
+        hrs.innerHTML =(currentTime.getHours()<10?"0":"")+currentTime.getHours(); 
+        mins.innerHTML =(currentTime.getMinutes()<10?"0":"")+currentTime.getMinutes();  
+        sec.innerHTML =(currentTime.getSeconds()<10?"0":"")+currentTime.getSeconds();    
+
+        },1000) 
+           
+    </script>
+    
+</body>
+</html>
